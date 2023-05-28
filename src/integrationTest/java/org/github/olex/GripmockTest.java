@@ -45,7 +45,7 @@ class GripmockTest {
     @Test
     public void getStubMappings() {
         // given
-        Gripmock gripmock = new Gripmock(gripmockContainer.getHost(), gripmockContainer.getHttpServerPort());
+        Gripmock gripmock = new Gripmock(gripmockContainer.getStubAdminAddress());
         var channelBuilder = ManagedChannelBuilder.forTarget(gripmockContainer.getGrpcServerAddress()).usePlaintext();
         GripmockGrpc.GripmockBlockingStub gripmockBlockingStub = GripmockGrpc.newBlockingStub(channelBuilder.build());
         var request = Simple.Request.newBuilder()
@@ -71,7 +71,7 @@ class GripmockTest {
     @Test
     public void clear() {
         // given
-        Gripmock gripmock = new Gripmock(gripmockContainer.getHost(), gripmockContainer.getHttpServerPort());
+        Gripmock gripmock = new Gripmock(gripmockContainer.getStubAdminAddress());
         createDummyStubbing();
 
         // when

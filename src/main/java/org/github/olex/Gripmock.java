@@ -12,16 +12,21 @@ import java.net.http.HttpResponse;
 public class Gripmock {
 
     private final ObjectMapper objectMapper = new ObjectMapper();
-    private final HttpClient httpClient = HttpClient.newHttpClient();
 
+    private final HttpClient httpClient;
     private final String address;
 
     public Gripmock(String address) {
-        this.address = address;
+        this(address, HttpClient.newHttpClient());
     }
 
     public Gripmock(String host, int port) {
-        this.address = "http://" + host + ":" + port;
+        this("http://" + host + ":" + port, HttpClient.newHttpClient());
+    }
+
+    public Gripmock(String address, HttpClient httpClient) {
+        this.address = address;
+        this.httpClient = httpClient;
     }
 
     public void addStubMapping(Stubbing stubbing) {
