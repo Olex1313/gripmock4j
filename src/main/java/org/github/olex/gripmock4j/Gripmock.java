@@ -1,7 +1,8 @@
-package org.github.olex;
+package org.github.olex.gripmock4j;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.github.olex.gripmock4j.stub.Stub;
 
 import java.io.IOException;
 import java.net.URI;
@@ -29,7 +30,7 @@ public class Gripmock {
         this.httpClient = httpClient;
     }
 
-    public void addStubMapping(Stubbing stubbing) {
+    public void addStubMapping(Stub stubbing) {
         try {
             String body = objectMapper.writeValueAsString(stubbing);
             var request = HttpRequest.newBuilder()
@@ -42,14 +43,6 @@ public class Gripmock {
         }
     }
 
-    public String getStubMappings() {
-        var request = HttpRequest.newBuilder()
-                .GET()
-                .uri(URI.create(address + "/"))
-                .build();
-        return doRequest(request, HttpResponse.BodyHandlers.ofString());
-    }
-
     public void clear() {
         var request = HttpRequest.newBuilder()
                 .GET()
@@ -58,7 +51,7 @@ public class Gripmock {
         doRequest(request, HttpResponse.BodyHandlers.ofString());
     }
 
-    private <T> T doRequest(HttpRequest httpRequest, HttpResponse.BodyHandler<T> bodyHandler) {
+    private <T> void doRequest(HttpRequest httpRequest, HttpResponse.BodyHandler<T> bodyHandler) {
         try {
             HttpResponse<T> response = httpClient.send(httpRequest, bodyHandler);
             if (response.statusCode() / 100 != 2) {
@@ -66,7 +59,7 @@ public class Gripmock {
                         .formatted(response.statusCode())
                 );
             }
-            return response.body();
+            response.body();
         } catch (IOException | InterruptedException e) {
             throw new GripmockClientException("Unexpected exception while doing http request to gripmock", e);
         }

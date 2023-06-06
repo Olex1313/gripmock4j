@@ -1,4 +1,4 @@
-package org.github.olex;
+package org.github.olex.gripmock4j;
 
 import org.testcontainers.containers.GenericContainer;
 import org.testcontainers.containers.wait.strategy.Wait;

@@ -1,4 +1,4 @@
-package org.github.olex;
+package org.github.olex.gripmock4j;
 
 public class GripmockClientException extends RuntimeException {
 
