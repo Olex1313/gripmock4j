@@ -1,7 +1,5 @@
 syntax = "proto3";
 
-package simple;
-
 option java_package = "org.github.olex.grpc";
 
 // The Gripmock service definition.

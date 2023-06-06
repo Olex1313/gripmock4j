@@ -6,7 +6,7 @@ plugins {
     id("com.google.protobuf") version "0.9.3"
 }
 
-group = "org.github.olex"
+group = "org.github.olex.gripmock4j"
 version = "1.0-SNAPSHOT"
 
 repositories {
@@ -93,6 +93,7 @@ dependencies {
     // gRPC
     runtimeOnly("io.grpc:grpc-netty-shaded:1.54.1")
     implementation("com.google.protobuf:protobuf-java:3.23.1")
+    implementation("com.google.protobuf:protobuf-java-util:3.23.1")
     implementation("io.grpc:grpc-protobuf:1.54.1")
     implementation("io.grpc:grpc-stub:1.54.1")
     compileOnly("org.apache.tomcat:annotations-api:6.0.53") // necessary for Java 9+
